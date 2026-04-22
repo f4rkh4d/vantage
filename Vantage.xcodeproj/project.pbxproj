@@ -10,6 +10,7 @@
 		7A075AD6212ECD5772B51C5F /* PlaceholderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */; };
 		88D1ADEF9BE128F55B77B9A7 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC8202B1773A1236BBDA3 /* AppState.swift */; };
 		8A1BD476A80B964BAE1DC645 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6926379167FE0FA4D4B846 /* AppStateTests.swift */; };
+		A59BDA352C8DD02909D31856 /* Module+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF738E6EF8FFBCC8C5B5DEF /* Module+UI.swift */; };
 		FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A135EF285B705DD87E636C /* VantageApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AF738E6EF8FFBCC8C5B5DEF /* Module+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Module+UI.swift"; sourceTree = "<group>"; };
 		0BFB3236AF5027E0A4F401CF /* Vantage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vantage.entitlements; sourceTree = "<group>"; };
 		2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTests.swift; sourceTree = "<group>"; };
 		80A135EF285B705DD87E636C /* VantageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VantageApp.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				D98AC8202B1773A1236BBDA3 /* AppState.swift */,
+				0AF738E6EF8FFBCC8C5B5DEF /* Module+UI.swift */,
 				80A135EF285B705DD87E636C /* VantageApp.swift */,
 			);
 			path = App;
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88D1ADEF9BE128F55B77B9A7 /* AppState.swift in Sources */,
+				A59BDA352C8DD02909D31856 /* Module+UI.swift in Sources */,
 				FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

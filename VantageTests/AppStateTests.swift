@@ -1,7 +1,9 @@
 import Testing
+import SwiftUI
 @testable import Vantage
 
 @Suite("AppState")
+@MainActor
 struct AppStateTests {
     @Test("default active module is windowManager")
     func defaultModule() {
@@ -27,5 +29,14 @@ struct AppStateTests {
             #expect(!module.title.isEmpty)
             #expect(!module.icon.isEmpty)
         }
+    }
+
+    @Test("all module accent color RGB components are unique across modules")
+    func moduleAccentColors() {
+        let keys = Module.allCases.map { m -> String in
+            let c = m.accentColor.resolve(in: EnvironmentValues())
+            return String(format: "%.2f,%.2f,%.2f", c.red, c.green, c.blue)
+        }
+        #expect(Set(keys).count == Module.allCases.count)
     }
 }
