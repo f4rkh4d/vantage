@@ -92,6 +92,7 @@ struct AIAssistantView: View {
         case .openAI: return .green
         case .anthropic: return .orange
         case .gemini: return .blue
+        case .deepSeek: return Color(red: 0.0, green: 0.7, blue: 1.0)
         }
     }
 
@@ -132,6 +133,7 @@ struct AIAssistantView: View {
         case .openAI: return "Get your key at platform.openai.com"
         case .anthropic: return "Get your key at console.anthropic.com"
         case .gemini: return "Get your key at aistudio.google.com"
+        case .deepSeek: return "Get your key at platform.deepseek.com"
         }
     }
 
@@ -297,6 +299,7 @@ private struct InlineKeyField: View {
         case .openAI: manager.openAIKey = draft
         case .anthropic: manager.anthropicKey = draft
         case .gemini: manager.geminiKey = draft
+        case .deepSeek: manager.deepSeekKey = draft
         }
     }
 }
@@ -310,6 +313,7 @@ private struct ProviderSettingsPanel: View {
     @State private var draftOpenAI = ""
     @State private var draftAnthropic = ""
     @State private var draftGemini = ""
+    @State private var draftDeepSeek = ""
 
     var body: some View {
         ScrollView {
@@ -345,6 +349,15 @@ private struct ProviderSettingsPanel: View {
                     onSave: { manager.geminiKey = draftGemini }
                 )
 
+                providerKeyRow(
+                    label: "DeepSeek",
+                    color: Color(red: 0.0, green: 0.7, blue: 1.0),
+                    placeholder: AIProvider.deepSeek.keyPrompt,
+                    draft: $draftDeepSeek,
+                    saved: manager.deepSeekKey,
+                    onSave: { manager.deepSeekKey = draftDeepSeek }
+                )
+
                 Text("Keys are stored locally in UserDefaults.")
                     .font(.system(size: 10))
                     .foregroundStyle(.secondary.opacity(0.7))
@@ -355,6 +368,7 @@ private struct ProviderSettingsPanel: View {
             draftOpenAI = manager.openAIKey
             draftAnthropic = manager.anthropicKey
             draftGemini = manager.geminiKey
+            draftDeepSeek = manager.deepSeekKey
         }
     }
 

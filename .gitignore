@@ -1,7 +1,8 @@
 .DS_Store
+build/
 *.xcuserstate
 xcuserdata/
 DerivedData/
-.build/
+*.xcworkspace/xcuserdata/
+Vantage.dmg
 .superpowers/
-*.ipa
