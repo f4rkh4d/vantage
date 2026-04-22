@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7A075AD6212ECD5772B51C5F /* PlaceholderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */; };
+		88D1ADEF9BE128F55B77B9A7 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC8202B1773A1236BBDA3 /* AppState.swift */; };
+		8A1BD476A80B964BAE1DC645 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6926379167FE0FA4D4B846 /* AppStateTests.swift */; };
 		FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A135EF285B705DD87E636C /* VantageApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		80A135EF285B705DD87E636C /* VantageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VantageApp.swift; sourceTree = "<group>"; };
 		AAAAD71FD8AFD260BA2DE6AB /* VantageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VantageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8EB830F3CD1D914029F82FB /* Vantage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vantage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB6926379167FE0FA4D4B846 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		D98AC8202B1773A1236BBDA3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -59,6 +63,7 @@
 		C0D4DF236B51F3D8CD783155 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D98AC8202B1773A1236BBDA3 /* AppState.swift */,
 				80A135EF285B705DD87E636C /* VantageApp.swift */,
 			);
 			path = App;
@@ -67,6 +72,7 @@
 		C4B310A36021C6368329AFA0 /* VantageTests */ = {
 			isa = PBXGroup;
 			children = (
+				BB6926379167FE0FA4D4B846 /* AppStateTests.swift */,
 				2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */,
 			);
 			path = VantageTests;
@@ -155,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D1ADEF9BE128F55B77B9A7 /* AppState.swift in Sources */,
 				FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A1BD476A80B964BAE1DC645 /* AppStateTests.swift in Sources */,
 				7A075AD6212ECD5772B51C5F /* PlaceholderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
