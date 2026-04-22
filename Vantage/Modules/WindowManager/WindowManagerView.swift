@@ -5,11 +5,35 @@ struct WindowManagerView: View {
     @State private var hoveredZone: SnapZone? = nil
     @State private var flashedZone: SnapZone? = nil
     @State private var noWindowAlert = false
+    @State private var axGranted = Permissions.isAccessibilityGranted()
     private let manager = WindowManagerManager.shared
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 3)
 
     var body: some View {
         VStack(spacing: 0) {
+            if !axGranted {
+                HStack(spacing: 8) {
+                    Image(systemName: "lock.shield")
+                        .foregroundStyle(.orange)
+                        .font(.system(size: 13))
+                    Text("Accessibility access required")
+                        .font(.system(size: 11, weight: .medium))
+                    Spacer()
+                    Button("Grant") {
+                        Permissions.requestAccessibilityIfNeeded()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            axGranted = Permissions.isAccessibilityGranted()
+                        }
+                    }
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.orange)
+                    .buttonStyle(.plain)
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(Color.orange.opacity(0.08))
+                Divider()
+            }
             header
             Divider()
             zoneGrid
@@ -18,6 +42,7 @@ struct WindowManagerView: View {
             shortcutHint
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear { axGranted = Permissions.isAccessibilityGranted() }
         .alert("No window found", isPresented: $noWindowAlert) {
             Button("OK", role: .cancel) {}
         } message: {

@@ -18,11 +18,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        Permissions.requestAccessibilityIfNeeded()
         setupStatusItem()
         setupPopover()
         pollingTimer = StatusPoller.startPolling(appState: appState)
         setupWindowManagerHotkeys()
+        ClipboardManager.shared.start()
+        SystemMonitorManager.shared.start()
     }
 
     private func setupWindowManagerHotkeys() {
@@ -69,5 +70,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         pollingTimer?.invalidate()
         HotkeyEngine.shared.stop()
+        ClipboardManager.shared.stop()
+        SystemMonitorManager.shared.stop()
     }
 }
