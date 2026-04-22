@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		105FB3203CD719C288F3B7EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAFDFBB620BD64E49B49C1E1 /* Assets.xcassets */; };
 		106A265BFEDF6F32E5743072 /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B182EFE9570F703902568CB /* AppLauncherView.swift */; };
 		13DDDB5B1BB11C7B86A67AF2 /* FocusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85EA374E5B15EDE5451BEF0 /* FocusManager.swift */; };
 		1C6399A2DAEBB6B56EEB8259 /* ClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314361588F67A5569C143CE /* ClipboardView.swift */; };
@@ -106,6 +107,7 @@
 		D71E3B7907B83D694591CCAD /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		D84386BC07738F675766E650 /* WindowManagerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManagerManager.swift; sourceTree = "<group>"; };
 		D98AC8202B1773A1236BBDA3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		DAFDFBB620BD64E49B49C1E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6CF62F741FB54F464596939 /* StatusPoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPoller.swift; sourceTree = "<group>"; };
 		F85EA374E5B15EDE5451BEF0 /* FocusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusManager.swift; sourceTree = "<group>"; };
 		FC63C59C1813B992FC513F6F /* MenubarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		AE1820AB6C81EE599DCF8F5B /* Vantage */ = {
 			isa = PBXGroup;
 			children = (
+				DAFDFBB620BD64E49B49C1E1 /* Assets.xcassets */,
 				C0D4DF236B51F3D8CD783155 /* App */,
 				77BEA56528461209509BD0CA /* Modules */,
 				18808A7EB2140D2FA008A146 /* Resources */,
@@ -308,6 +311,7 @@
 			buildConfigurationList = 3E9B3C1FB5CBEEF7CFB36FB7 /* Build configuration list for PBXNativeTarget "Vantage" */;
 			buildPhases = (
 				0E36F3B4F0F99218094B5DBB /* Sources */,
+				7146002EBA2DF7316FC637DA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -368,6 +372,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7146002EBA2DF7316FC637DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				105FB3203CD719C288F3B7EB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0E36F3B4F0F99218094B5DBB /* Sources */ = {
