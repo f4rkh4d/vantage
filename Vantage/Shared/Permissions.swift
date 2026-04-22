@@ -8,6 +8,6 @@ enum Permissions {
     static func requestAccessibilityIfNeeded() {
         guard !isAccessibilityGranted() else { return }
         let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
-        AXIsProcessTrustedWithOptions(options)
+        _ = AXIsProcessTrustedWithOptions(options)
     }
 }
