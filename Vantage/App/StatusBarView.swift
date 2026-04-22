@@ -79,7 +79,6 @@ private struct BatteryWidget: View {
     let isCharging: Bool
 
     private var barColor: Color {
-        if isCharging { return Color(red: 0.25, green: 0.85, blue: 0.55) }
         if level < 0.20 { return .red }
         if level < 0.40 { return .orange }
         return Color(red: 0.25, green: 0.85, blue: 0.55)
