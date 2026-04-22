@@ -4,6 +4,7 @@ enum AIProvider: String, CaseIterable, Identifiable {
     case openAI = "OpenAI"
     case anthropic = "Anthropic"
     case gemini = "Gemini"
+    case deepSeek = "DeepSeek"
     var id: String { rawValue }
 
     var keyPrompt: String {
@@ -11,6 +12,7 @@ enum AIProvider: String, CaseIterable, Identifiable {
         case .openAI: return "sk-..."
         case .anthropic: return "sk-ant-..."
         case .gemini: return "AIza..."
+        case .deepSeek: return "sk-..."
         }
     }
 
@@ -20,6 +22,7 @@ enum AIProvider: String, CaseIterable, Identifiable {
         case .openAI: return "gpt-4o-mini"
         case .anthropic: return "claude-haiku-4-5-20251001"
         case .gemini: return "gemini-1.5-flash"
+        case .deepSeek: return "deepseek-chat"
         }
     }
 }
@@ -39,12 +42,14 @@ final class AIAssistantManager: ObservableObject {
     @Published var openAIKey: String { didSet { UserDefaults.standard.set(openAIKey, forKey: "key_openai") } }
     @Published var anthropicKey: String { didSet { UserDefaults.standard.set(anthropicKey, forKey: "key_anthropic") } }
     @Published var geminiKey: String { didSet { UserDefaults.standard.set(geminiKey, forKey: "key_gemini") } }
+    @Published var deepSeekKey: String { didSet { UserDefaults.standard.set(deepSeekKey, forKey: "key_deepseek") } }
 
     var currentKey: String {
         switch selectedProvider {
         case .openAI: return openAIKey
         case .anthropic: return anthropicKey
         case .gemini: return geminiKey
+        case .deepSeek: return deepSeekKey
         }
     }
 
@@ -54,6 +59,7 @@ final class AIAssistantManager: ObservableObject {
         openAIKey = UserDefaults.standard.string(forKey: "key_openai") ?? ""
         anthropicKey = UserDefaults.standard.string(forKey: "key_anthropic") ?? ""
         geminiKey = UserDefaults.standard.string(forKey: "key_gemini") ?? ""
+        deepSeekKey = UserDefaults.standard.string(forKey: "key_deepseek") ?? ""
     }
 
     func send(userText: String) {
@@ -70,6 +76,7 @@ final class AIAssistantManager: ObservableObject {
         case .openAI: task = makeOpenAIRequest()
         case .anthropic: task = makeAnthropicRequest()
         case .gemini: task = makeGeminiRequest()
+        case .deepSeek: task = makeDeepSeekRequest()
         }
         task.resume()
     }
@@ -152,6 +159,31 @@ final class AIAssistantManager: ObservableObject {
                       let text = parts.first?["text"] as? String
                 else { self?.errorMessage = "Invalid response from Gemini."; return }
                 self?.messages.append(AIMessage(role: "assistant", content: text))
+            }
+        }
+    }
+
+    private func makeDeepSeekRequest() -> URLSessionDataTask {
+        var req = URLRequest(url: URL(string: "https://api.deepseek.com/v1/chat/completions")!)
+        req.httpMethod = "POST"
+        req.setValue("Bearer \(deepSeekKey)", forHTTPHeaderField: "Authorization")
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let body: [String: Any] = [
+            "model": AIProvider.deepSeek.modelName,
+            "messages": messages.map { ["role": $0.role, "content": $0.content] }
+        ]
+        req.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        return URLSession.shared.dataTask(with: req) { [weak self] data, _, error in
+            Task { @MainActor [weak self] in
+                self?.isLoading = false
+                if let error { self?.errorMessage = error.localizedDescription; return }
+                guard let data,
+                      let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                      let choices = json["choices"] as? [[String: Any]],
+                      let msg = choices.first?["message"] as? [String: Any],
+                      let content = msg["content"] as? String
+                else { self?.errorMessage = "Invalid response from DeepSeek."; return }
+                self?.messages.append(AIMessage(role: "assistant", content: content))
             }
         }
     }
