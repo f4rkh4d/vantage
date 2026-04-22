@@ -28,9 +28,6 @@ targets:
     settings:
       base:
         PRODUCT_NAME: Vantage
-    dependencies:
-      - package: Sparkle
-        product: Sparkle
     scheme:
       testTargets:
         - VantageTests
@@ -41,7 +38,3 @@ targets:
       - VantageTests
     dependencies:
       - target: Vantage
-packages:
-  Sparkle:
-    url: https://github.com/sparkle-project/Sparkle
-    version: 2.6.0
