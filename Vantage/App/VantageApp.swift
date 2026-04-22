@@ -22,6 +22,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         setupStatusItem()
         setupPopover()
         pollingTimer = StatusPoller.startPolling(appState: appState)
+        setupWindowManagerHotkeys()
+    }
+
+    private func setupWindowManagerHotkeys() {
+        let engine = HotkeyEngine.shared
+        for zone in SnapZone.all {
+            engine.register(keyCode: zone.keyCode) {
+                WindowManagerManager.shared.snap(to: zone)
+            }
+        }
+        engine.start()
     }
 
     private func setupStatusItem() {

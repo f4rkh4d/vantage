@@ -14,8 +14,10 @@
 		2E087E4127507E38DF39C900 /* NetworkToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704B3B3D33ADBE03838E9691 /* NetworkToolsView.swift */; };
 		2FA2C9A9C2F96DA68768DD75 /* StatusPollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */; };
 		39F6C00193269B6FEBA1CB8B /* FocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506E29059956F38436101DD9 /* FocusView.swift */; };
+		416DF96D0D3AC1298263C3AB /* WindowManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46635A6C88547ABB14B5D7E7 /* WindowManagerModel.swift */; };
 		4488BB57E867036B0FF09679 /* ModuleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34015B6C4B07A180566690C7 /* ModuleContentView.swift */; };
 		475F157D02B83B4E885AAE34 /* BatteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9245D0F6B9476A3BF13428 /* BatteryView.swift */; };
+		4BA3DF3E4AB933D6406CB194 /* WindowManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D11A5C6FC845C6238D4BEC /* WindowManagerTests.swift */; };
 		4C0E4162D5A29656F8DF9609 /* StatusPoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF62F741FB54F464596939 /* StatusPoller.swift */; };
 		4E81B060C0EEB0EEDD28D15D /* DisplayControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9AF46B1930629B242096D4 /* DisplayControlsView.swift */; };
 		537AD61DF4D558B23297EC11 /* WindowManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5116B88EC53D1532361EC3C /* WindowManagerView.swift */; };
@@ -28,7 +30,9 @@
 		8A1BD476A80B964BAE1DC645 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6926379167FE0FA4D4B846 /* AppStateTests.swift */; };
 		A59BDA352C8DD02909D31856 /* Module+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF738E6EF8FFBCC8C5B5DEF /* Module+UI.swift */; };
 		B4AA8CD1285839CC181A7B24 /* AIAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD055A4AB66121C56F0C03C /* AIAssistantView.swift */; };
+		B54402239D2428A1461D08E5 /* HotkeyEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D766D7985B0EE22A3C1149 /* HotkeyEngine.swift */; };
 		C7C732321F6493E111848A66 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E3B7907B83D694591CCAD /* Permissions.swift */; };
+		CC52595EB420D158759A8A31 /* WindowManagerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84386BC07738F675766E650 /* WindowManagerManager.swift */; };
 		D0E205FDC8AD7CDFCCDEF00D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A012FF6FD6E342614C9FAE76 /* SidebarView.swift */; };
 		E4DFD021D73D7A4F393F2050 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B626F7377646DC49958E6 /* SettingsView.swift */; };
 		FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A135EF285B705DD87E636C /* VantageApp.swift */; };
@@ -51,7 +55,10 @@
 		2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTests.swift; sourceTree = "<group>"; };
 		3314361588F67A5569C143CE /* ClipboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardView.swift; sourceTree = "<group>"; };
 		34015B6C4B07A180566690C7 /* ModuleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleContentView.swift; sourceTree = "<group>"; };
+		36D766D7985B0EE22A3C1149 /* HotkeyEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyEngine.swift; sourceTree = "<group>"; };
 		3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPollerTests.swift; sourceTree = "<group>"; };
+		43D11A5C6FC845C6238D4BEC /* WindowManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManagerTests.swift; sourceTree = "<group>"; };
+		46635A6C88547ABB14B5D7E7 /* WindowManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManagerModel.swift; sourceTree = "<group>"; };
 		506E29059956F38436101DD9 /* FocusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusView.swift; sourceTree = "<group>"; };
 		5F9245D0F6B9476A3BF13428 /* BatteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryView.swift; sourceTree = "<group>"; };
 		60BAE302012375EDFD9A1325 /* PermissionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsTests.swift; sourceTree = "<group>"; };
@@ -70,6 +77,7 @@
 		CDC7339341AB27293D7B17A1 /* TextSnippetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSnippetsView.swift; sourceTree = "<group>"; };
 		D2BFCA9E39A11F306696ECFA /* SystemMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMonitorView.swift; sourceTree = "<group>"; };
 		D71E3B7907B83D694591CCAD /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
+		D84386BC07738F675766E650 /* WindowManagerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManagerManager.swift; sourceTree = "<group>"; };
 		D98AC8202B1773A1236BBDA3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		E6CF62F741FB54F464596939 /* StatusPoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPoller.swift; sourceTree = "<group>"; };
 		FC63C59C1813B992FC513F6F /* MenubarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarView.swift; sourceTree = "<group>"; };
@@ -144,6 +152,8 @@
 		8779585A9FA59330779CB074 /* WindowManager */ = {
 			isa = PBXGroup;
 			children = (
+				D84386BC07738F675766E650 /* WindowManagerManager.swift */,
+				46635A6C88547ABB14B5D7E7 /* WindowManagerModel.swift */,
 				B5116B88EC53D1532361EC3C /* WindowManagerView.swift */,
 			);
 			path = WindowManager;
@@ -199,6 +209,7 @@
 				60BAE302012375EDFD9A1325 /* PermissionsTests.swift */,
 				2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */,
 				3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */,
+				43D11A5C6FC845C6238D4BEC /* WindowManagerTests.swift */,
 			);
 			path = VantageTests;
 			sourceTree = "<group>";
@@ -231,6 +242,7 @@
 		E68DEE94B5A98ADB8EE04188 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				36D766D7985B0EE22A3C1149 /* HotkeyEngine.swift */,
 				D71E3B7907B83D694591CCAD /* Permissions.swift */,
 				7BE6F335737BFFAE98FDFEA3 /* PlaceholderView.swift */,
 				E6CF62F741FB54F464596939 /* StatusPoller.swift */,
@@ -327,6 +339,7 @@
 				1C6399A2DAEBB6B56EEB8259 /* ClipboardView.swift in Sources */,
 				4E81B060C0EEB0EEDD28D15D /* DisplayControlsView.swift in Sources */,
 				39F6C00193269B6FEBA1CB8B /* FocusView.swift in Sources */,
+				B54402239D2428A1461D08E5 /* HotkeyEngine.swift in Sources */,
 				230C48157548540C04352EC1 /* MenubarView.swift in Sources */,
 				A59BDA352C8DD02909D31856 /* Module+UI.swift in Sources */,
 				4488BB57E867036B0FF09679 /* ModuleContentView.swift in Sources */,
@@ -340,6 +353,8 @@
 				2937311B1112E0675C55DAB4 /* SystemMonitorView.swift in Sources */,
 				7BFD5A3D4F3D0BBACDA86D75 /* TextSnippetsView.swift in Sources */,
 				FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */,
+				CC52595EB420D158759A8A31 /* WindowManagerManager.swift in Sources */,
+				416DF96D0D3AC1298263C3AB /* WindowManagerModel.swift in Sources */,
 				537AD61DF4D558B23297EC11 /* WindowManagerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +367,7 @@
 				63FB13B1456AAA9609714501 /* PermissionsTests.swift in Sources */,
 				7A075AD6212ECD5772B51C5F /* PlaceholderTests.swift in Sources */,
 				2FA2C9A9C2F96DA68768DD75 /* StatusPollerTests.swift in Sources */,
+				4BA3DF3E4AB933D6406CB194 /* WindowManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
