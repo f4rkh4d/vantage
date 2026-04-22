@@ -1,0 +1,47 @@
+name: Vantage
+options:
+  bundleIdPrefix: com.frkhd
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    MACOSX_DEPLOYMENT_TARGET: 14.0
+    INFOPLIST_FILE: Vantage/Resources/Info.plist
+    CODE_SIGN_ENTITLEMENTS: Vantage/Resources/Vantage.entitlements
+    PRODUCT_BUNDLE_IDENTIFIER: com.frkhd.vantage
+    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 1
+    ENABLE_HARDENED_RUNTIME: YES
+targets:
+  Vantage:
+    type: application
+    platform: macOS
+    sources:
+      - path: Vantage
+        excludes:
+          - "Resources/Info.plist"
+    resources:
+      - Vantage/Resources
+    settings:
+      base:
+        PRODUCT_NAME: Vantage
+    dependencies:
+      - package: Sparkle
+        product: Sparkle
+    scheme:
+      testTargets:
+        - VantageTests
+  VantageTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - VantageTests
+    dependencies:
+      - target: Vantage
+packages:
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    version: 2.6.0
