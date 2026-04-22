@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FA2C9A9C2F96DA68768DD75 /* StatusPollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */; };
+		4C0E4162D5A29656F8DF9609 /* StatusPoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF62F741FB54F464596939 /* StatusPoller.swift */; };
 		7A075AD6212ECD5772B51C5F /* PlaceholderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */; };
 		88D1ADEF9BE128F55B77B9A7 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC8202B1773A1236BBDA3 /* AppState.swift */; };
 		8A1BD476A80B964BAE1DC645 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB6926379167FE0FA4D4B846 /* AppStateTests.swift */; };
@@ -28,11 +30,13 @@
 		0AF738E6EF8FFBCC8C5B5DEF /* Module+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Module+UI.swift"; sourceTree = "<group>"; };
 		0BFB3236AF5027E0A4F401CF /* Vantage.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Vantage.entitlements; sourceTree = "<group>"; };
 		2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTests.swift; sourceTree = "<group>"; };
+		3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPollerTests.swift; sourceTree = "<group>"; };
 		80A135EF285B705DD87E636C /* VantageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VantageApp.swift; sourceTree = "<group>"; };
 		AAAAD71FD8AFD260BA2DE6AB /* VantageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VantageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8EB830F3CD1D914029F82FB /* Vantage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vantage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB6926379167FE0FA4D4B846 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
 		D98AC8202B1773A1236BBDA3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		E6CF62F741FB54F464596939 /* StatusPoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPoller.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -58,6 +62,7 @@
 			children = (
 				C0D4DF236B51F3D8CD783155 /* App */,
 				18808A7EB2140D2FA008A146 /* Resources */,
+				E68DEE94B5A98ADB8EE04188 /* Shared */,
 			);
 			path = Vantage;
 			sourceTree = "<group>";
@@ -77,6 +82,7 @@
 			children = (
 				BB6926379167FE0FA4D4B846 /* AppStateTests.swift */,
 				2E28618CEF9987D9DED77A25 /* PlaceholderTests.swift */,
+				3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */,
 			);
 			path = VantageTests;
 			sourceTree = "<group>";
@@ -88,6 +94,14 @@
 				AAAAD71FD8AFD260BA2DE6AB /* VantageTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E68DEE94B5A98ADB8EE04188 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E6CF62F741FB54F464596939 /* StatusPoller.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +180,7 @@
 			files = (
 				88D1ADEF9BE128F55B77B9A7 /* AppState.swift in Sources */,
 				A59BDA352C8DD02909D31856 /* Module+UI.swift in Sources */,
+				4C0E4162D5A29656F8DF9609 /* StatusPoller.swift in Sources */,
 				FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +191,7 @@
 			files = (
 				8A1BD476A80B964BAE1DC645 /* AppStateTests.swift in Sources */,
 				7A075AD6212ECD5772B51C5F /* PlaceholderTests.swift in Sources */,
+				2FA2C9A9C2F96DA68768DD75 /* StatusPollerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
