@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		106A265BFEDF6F32E5743072 /* AppLauncherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B182EFE9570F703902568CB /* AppLauncherView.swift */; };
 		1C6399A2DAEBB6B56EEB8259 /* ClipboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3314361588F67A5569C143CE /* ClipboardView.swift */; };
+		230C48157548540C04352EC1 /* MenubarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC63C59C1813B992FC513F6F /* MenubarView.swift */; };
 		2937311B1112E0675C55DAB4 /* SystemMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BFCA9E39A11F306696ECFA /* SystemMonitorView.swift */; };
 		2E087E4127507E38DF39C900 /* NetworkToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704B3B3D33ADBE03838E9691 /* NetworkToolsView.swift */; };
 		2FA2C9A9C2F96DA68768DD75 /* StatusPollerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CB420D47DA51829CF913FA3 /* StatusPollerTests.swift */; };
@@ -29,6 +30,7 @@
 		B4AA8CD1285839CC181A7B24 /* AIAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD055A4AB66121C56F0C03C /* AIAssistantView.swift */; };
 		C7C732321F6493E111848A66 /* Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71E3B7907B83D694591CCAD /* Permissions.swift */; };
 		D0E205FDC8AD7CDFCCDEF00D /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A012FF6FD6E342614C9FAE76 /* SidebarView.swift */; };
+		E4DFD021D73D7A4F393F2050 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B626F7377646DC49958E6 /* SettingsView.swift */; };
 		FA7F51C0438EBCE7E988ECD0 /* VantageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A135EF285B705DD87E636C /* VantageApp.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +60,7 @@
 		704B3B3D33ADBE03838E9691 /* NetworkToolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkToolsView.swift; sourceTree = "<group>"; };
 		72391FD651024960FD515D17 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
 		7BE6F335737BFFAE98FDFEA3 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
+		809B626F7377646DC49958E6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		80A135EF285B705DD87E636C /* VantageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VantageApp.swift; sourceTree = "<group>"; };
 		A012FF6FD6E342614C9FAE76 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		AAAAD71FD8AFD260BA2DE6AB /* VantageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VantageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +72,7 @@
 		D71E3B7907B83D694591CCAD /* Permissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permissions.swift; sourceTree = "<group>"; };
 		D98AC8202B1773A1236BBDA3 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		E6CF62F741FB54F464596939 /* StatusPoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusPoller.swift; sourceTree = "<group>"; };
+		FC63C59C1813B992FC513F6F /* MenubarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -177,8 +181,10 @@
 			isa = PBXGroup;
 			children = (
 				D98AC8202B1773A1236BBDA3 /* AppState.swift */,
+				FC63C59C1813B992FC513F6F /* MenubarView.swift */,
 				0AF738E6EF8FFBCC8C5B5DEF /* Module+UI.swift */,
 				34015B6C4B07A180566690C7 /* ModuleContentView.swift */,
+				809B626F7377646DC49958E6 /* SettingsView.swift */,
 				A012FF6FD6E342614C9FAE76 /* SidebarView.swift */,
 				72391FD651024960FD515D17 /* StatusBarView.swift */,
 				80A135EF285B705DD87E636C /* VantageApp.swift */,
@@ -321,11 +327,13 @@
 				1C6399A2DAEBB6B56EEB8259 /* ClipboardView.swift in Sources */,
 				4E81B060C0EEB0EEDD28D15D /* DisplayControlsView.swift in Sources */,
 				39F6C00193269B6FEBA1CB8B /* FocusView.swift in Sources */,
+				230C48157548540C04352EC1 /* MenubarView.swift in Sources */,
 				A59BDA352C8DD02909D31856 /* Module+UI.swift in Sources */,
 				4488BB57E867036B0FF09679 /* ModuleContentView.swift in Sources */,
 				2E087E4127507E38DF39C900 /* NetworkToolsView.swift in Sources */,
 				C7C732321F6493E111848A66 /* Permissions.swift in Sources */,
 				89BB1E97CDCFF5365A5D8B9E /* PlaceholderView.swift in Sources */,
+				E4DFD021D73D7A4F393F2050 /* SettingsView.swift in Sources */,
 				D0E205FDC8AD7CDFCCDEF00D /* SidebarView.swift in Sources */,
 				5AF9E8767A664AC62CB45EF2 /* StatusBarView.swift in Sources */,
 				4C0E4162D5A29656F8DF9609 /* StatusPoller.swift in Sources */,
