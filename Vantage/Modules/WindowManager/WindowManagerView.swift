@@ -140,7 +140,8 @@ struct WindowManagerView: View {
         let success = manager.snap(to: zone)
         if success {
             withAnimation(.easeOut(duration: 0.1)) { flashedZone = zone }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(350))
                 withAnimation { flashedZone = nil }
             }
         } else {
@@ -245,8 +246,8 @@ private struct ZonePreview: View {
         case "bottomLeft":      return CGRect(x: 0,     y: h/2, width: w/2,  height: h/2)
         case "bottomRight":     return CGRect(x: w/2,   y: h/2, width: w/2,  height: h/2)
         case "center":
-            let margin = w * 0.1
-            return CGRect(x: margin, y: margin, width: w - 2*margin, height: h - 2*margin)
+            let margin = w * 0.08
+            return CGRect(x: margin, y: margin * (h / w), width: w - 2*margin, height: h - 2*margin*(h/w))
         default:                return CGRect(x: 0,     y: 0,   width: w,    height: h)
         }
     }
