@@ -49,9 +49,10 @@ struct SnapZone: Identifiable, Equatable {
         case "bottomRight":
             return CGRect(x: x + w / 2, y: y + h / 2, width: w / 2, height: h / 2)
         case "center":
-            let margin: CGFloat = 40
-            return CGRect(x: x + margin, y: y + margin,
-                         width: w - 2 * margin, height: h - 2 * margin)
+            let margin = w * 0.08  // 8% — matches ZonePreview
+            let vMargin = h * 0.08
+            return CGRect(x: x + margin, y: y + vMargin,
+                         width: w - 2 * margin, height: h - 2 * vMargin)
         default:
             return CGRect(x: x, y: y, width: w, height: h)
         }
