@@ -1,30 +1,20 @@
 import SwiftUI
+import AppKit
 
 struct SidebarView: View {
     @Environment(AppState.self) private var appState
     @Binding var showSettings: Bool
     @Namespace private var selectionNamespace
 
-    private let modules = Module.allCases
-    private let gearHeight: CGFloat = 44   // divider + button area
-    private let topPad: CGFloat = 8
-    private let iconSize: CGFloat = 34
-
     var body: some View {
-        GeometryReader { geo in
-            let available = geo.size.height - gearHeight - topPad
-            let count = CGFloat(modules.count)
-            // spacing can go negative (overlap) if truly needed, but floor at -2
-            let spacing = max(-2, (available - count * iconSize) / max(count - 1, 1))
-
-            VStack(spacing: 0) {
-                VStack(spacing: spacing) {
-                    ForEach(modules) { module in
+        VStack(spacing: 0) {
+            NoScrollbarScrollView {
+                VStack(spacing: 2) {
+                    ForEach(Module.allCases) { module in
                         SidebarButton(
                             module: module,
                             isSelected: appState.activeModule == module,
-                            namespace: selectionNamespace,
-                            size: iconSize
+                            namespace: selectionNamespace
                         ) {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
                                 appState.activeModule = module
@@ -32,25 +22,58 @@ struct SidebarView: View {
                         }
                     }
                 }
-                .padding(.top, topPad)
-
-                Spacer(minLength: 0)
-
-                Divider().opacity(0.4)
-
-                Button { showSettings = true } label: {
-                    Image(systemName: "gearshape")
-                        .font(.system(size: 14, weight: .medium))
-                        .frame(width: iconSize, height: iconSize)
-                        .foregroundStyle(.tertiary)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(SidebarGearButtonStyle())
-                .help("Settings")
-                .frame(height: gearHeight)
+                .padding(.vertical, 10)
             }
+
+            Divider().opacity(0.4)
+
+            Button { showSettings = true } label: {
+                Image(systemName: "gearshape")
+                    .font(.system(size: 15, weight: .medium))
+                    .frame(width: 36, height: 36)
+                    .foregroundStyle(.tertiary)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(SidebarGearButtonStyle())
+            .help("Settings")
+            .padding(.vertical, 6)
         }
         .frame(width: 52)
+    }
+}
+
+// NSScrollView wrapper that hides both scrollers at the AppKit level.
+private struct NoScrollbarScrollView<Content: View>: NSViewRepresentable {
+    let content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    func makeNSView(context: Context) -> NSScrollView {
+        let scrollView = NSScrollView()
+        scrollView.hasVerticalScroller = false
+        scrollView.hasHorizontalScroller = false
+        scrollView.autohidesScrollers = false
+        scrollView.drawsBackground = false
+        scrollView.borderType = .noBorder
+
+        let host = NSHostingView(rootView: content)
+        host.translatesAutoresizingMaskIntoConstraints = false
+
+        scrollView.documentView = host
+        NSLayoutConstraint.activate([
+            host.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
+            host.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
+        ])
+
+        return scrollView
+    }
+
+    func updateNSView(_ scrollView: NSScrollView, context: Context) {
+        if let host = scrollView.documentView as? NSHostingView<Content> {
+            host.rootView = content
+        }
     }
 }
 
@@ -58,7 +81,6 @@ private struct SidebarButton: View {
     let module: Module
     let isSelected: Bool
     let namespace: Namespace.ID
-    let size: CGFloat
     let action: () -> Void
     @State private var isHovered = false
 
@@ -66,16 +88,16 @@ private struct SidebarButton: View {
         Button(action: action) {
             ZStack {
                 if isSelected {
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    RoundedRectangle(cornerRadius: 9, style: .continuous)
                         .fill(module.accentColor.opacity(0.15))
                         .matchedGeometryEffect(id: "selection", in: namespace)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            RoundedRectangle(cornerRadius: 9, style: .continuous)
                                 .stroke(module.accentColor.opacity(0.2), lineWidth: 0.5)
                         )
                 }
                 Image(systemName: module.icon)
-                    .font(.system(size: 14, weight: isSelected ? .semibold : .regular))
+                    .font(.system(size: 15, weight: isSelected ? .semibold : .regular))
                     .foregroundStyle(
                         isSelected
                             ? AnyShapeStyle(module.accentColor)
@@ -84,13 +106,13 @@ private struct SidebarButton: View {
                     .scaleEffect(isHovered && !isSelected ? 1.08 : 1.0)
                     .animation(.spring(response: 0.2, dampingFraction: 0.6), value: isHovered)
             }
-            .frame(width: size, height: size)
+            .frame(width: 36, height: 36)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .help(module.title)
         .onHover { isHovered = $0 }
-        .padding(.horizontal, 9)
+        .padding(.horizontal, 8)
     }
 }
 
