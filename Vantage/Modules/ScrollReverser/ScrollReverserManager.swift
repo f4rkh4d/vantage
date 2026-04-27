@@ -47,6 +47,7 @@ final class ScrollReverserManager {
     func stop() { stopTap() }
 
     var hasAccessibility: Bool { AXIsProcessTrusted() }
+    var eventTapActive: Bool { eventTap != nil }
 
     func requestAccessibility() {
         let opts = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary

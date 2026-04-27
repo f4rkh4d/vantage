@@ -7,7 +7,7 @@ struct SidebarView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 2) {
                     ForEach(Module.allCases) { module in
                         SidebarButton(
@@ -24,6 +24,7 @@ struct SidebarView: View {
                 .padding(.top, 10)
             }
             .scrollIndicators(.hidden)
+            .clipped()
 
             Divider().opacity(0.4)
 
