@@ -62,23 +62,18 @@ private struct NoScrollbarScrollView<Content: View>: NSViewRepresentable {
         host.translatesAutoresizingMaskIntoConstraints = false
         scrollView.documentView = host
 
-        // Pin width to scroll view, let height grow freely so scrolling works.
-        NSLayoutConstraint.activate([
-            host.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
-            host.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
-            host.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
-        ])
-
         return scrollView
     }
 
     func updateNSView(_ scrollView: NSScrollView, context: Context) {
         guard let host = scrollView.documentView as? NSHostingView<Content> else { return }
         host.rootView = content
-        // Resize document to its natural height so NSScrollView knows the scroll range.
-        let width = scrollView.contentView.bounds.width
-        let fit = host.fittingSize
-        host.frame = NSRect(x: 0, y: 0, width: width > 0 ? width : fit.width, height: fit.height)
+        // Defer so the scroll view has finished its own layout pass first.
+        DispatchQueue.main.async {
+            let height = host.fittingSize.height
+            host.frame = NSRect(x: 0, y: 0, width: 52, height: height)
+            scrollView.documentView?.frame = host.frame
+        }
     }
 }
 

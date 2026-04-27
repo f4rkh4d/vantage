@@ -48,7 +48,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
         button.image = image
         button.action = #selector(handleStatusItemClick)
         button.target = self
-        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        button.sendAction(on: [.leftMouseUp, .rightMouseDown])
     }
 
     private func setupPopover() {
@@ -76,7 +76,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
 
     @objc private func handleStatusItemClick(_ sender: NSStatusBarButton) {
         guard let event = NSApp.currentEvent else { return }
-        if event.type == .rightMouseUp {
+        if event.type == .rightMouseDown {
             showContextMenu()
         } else {
             togglePopover(sender)
