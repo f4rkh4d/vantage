@@ -16,7 +16,7 @@ final class ScrollReverserManager {
         get { UserDefaults.standard.bool(forKey: "srEnabled") }
         set {
             UserDefaults.standard.set(newValue, forKey: "srEnabled")
-            newValue ? startTap() : stopTap()
+            if newValue { startTap() } else { stopTap() }
         }
     }
 
@@ -38,10 +38,12 @@ final class ScrollReverserManager {
         }
     }
 
-    func start() {
+    @discardableResult
+    func start() -> Bool {
         cachedReverseMouse = UserDefaults.standard.object(forKey: "srReverseMouse") as? Bool ?? true
         cachedReverseTrackpad = UserDefaults.standard.bool(forKey: "srReverseTrackpad")
-        if isEnabled { startTap() }
+        guard isEnabled else { return true }
+        return startTap()
     }
 
     func stop() { stopTap() }
@@ -54,10 +56,12 @@ final class ScrollReverserManager {
         AXIsProcessTrustedWithOptions(opts)
     }
 
-    private func startTap() {
-        guard eventTap == nil, AXIsProcessTrusted() else { return }
+    // Returns true if tap was successfully created, false if permission missing.
+    @discardableResult
+    func startTap() -> Bool {
+        guard eventTap == nil else { return true }
         let mask = CGEventMask(1 << CGEventType.scrollWheel.rawValue)
-        eventTap = CGEvent.tapCreate(
+        let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
@@ -65,10 +69,12 @@ final class ScrollReverserManager {
             callback: scrollCallback,
             userInfo: Unmanaged.passUnretained(self).toOpaque()
         )
-        guard let tap = eventTap else { return }
+        guard let tap else { return false }
+        eventTap = tap
         runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
         CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
         CGEvent.tapEnable(tap: tap, enable: true)
+        return true
     }
 
     private func stopTap() {

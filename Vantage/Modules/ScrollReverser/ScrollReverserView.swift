@@ -4,40 +4,39 @@ struct ScrollReverserView: View {
     @AppStorage("srEnabled")         private var enabled        = false
     @AppStorage("srReverseMouse")    private var reverseMouse   = true
     @AppStorage("srReverseTrackpad") private var reverseTrackpad = false
-    @State private var hasAccess = AXIsProcessTrusted()
-    @State private var tapFailed  = false  // permission granted but tap still won't create
-    private let permissionTimer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+
+    // Derived from whether the CGEventTap actually created successfully.
+    @State private var hasPermission = ScrollReverserManager.shared.eventTapActive
+    private let retryTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack(spacing: 0) {
             header
             Divider()
-            if !hasAccess {
+            if !hasPermission {
                 accessPrompt
-            } else if tapFailed {
-                relaunchPrompt
             } else {
                 rows
             }
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onAppear { checkAccess() }
-        .onReceive(permissionTimer) { _ in checkAccess() }
+        .onAppear { probe() }
+        .onReceive(retryTimer) { _ in
+            if !hasPermission { probe() }
+        }
     }
 
-    private func checkAccess() {
-        let trusted = AXIsProcessTrusted()
-        hasAccess = trusted
-        guard trusted else { return }
-        if enabled && ScrollReverserManager.shared.eventTapActive == false {
-            ScrollReverserManager.shared.start()
-            // Give it a moment, then check if tap actually started
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                if enabled && !ScrollReverserManager.shared.eventTapActive {
-                    tapFailed = true
-                }
-            }
+    // Try to start the tap; use the result as the permission indicator.
+    private func probe() {
+        if enabled {
+            let ok = ScrollReverserManager.shared.start()
+            hasPermission = ok
+        } else {
+            // Even if disabled, test by attempting a tap and tearing it down immediately.
+            let ok = ScrollReverserManager.shared.startTap()
+            if ok && !enabled { ScrollReverserManager.shared.stop() }
+            hasPermission = ok
         }
     }
 
@@ -54,14 +53,14 @@ struct ScrollReverserView: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text("Scroll Reverser")
                     .font(.system(size: 13, weight: .semibold))
-                Text(enabled ? "Active" : "Inactive")
+                Text(enabled && hasPermission ? "Active" : "Inactive")
                     .font(.system(size: 10)).foregroundStyle(.tertiary)
             }
             Spacer()
             Toggle("", isOn: $enabled)
                 .toggleStyle(.switch)
                 .labelsHidden()
-                .disabled(!hasAccess)
+                .disabled(!hasPermission)
                 .onChange(of: enabled) { _, new in
                     ScrollReverserManager.shared.isEnabled = new
                 }
@@ -119,30 +118,20 @@ struct ScrollReverserView: View {
                 .font(.system(size: 32)).foregroundStyle(.secondary)
             Text("Accessibility Access Required")
                 .font(.system(size: 13, weight: .semibold))
-            Text("Scroll Reverser intercepts scroll events system-wide.\nmacOS requires Accessibility permission for this.")
+            Text("Scroll Reverser needs Accessibility permission\nto intercept scroll events system-wide.")
                 .font(.system(size: 11)).foregroundStyle(.secondary)
                 .multilineTextAlignment(.center).padding(.horizontal, 20)
             Button("Open System Settings") {
-                ScrollReverserManager.shared.requestAccessibility()
+                let opts = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+                AXIsProcessTrustedWithOptions(opts)
             }
             .buttonStyle(.borderedProminent).controlSize(.small)
-        }
-        .padding(24).frame(maxWidth: .infinity)
-    }
-
-    private var relaunchPrompt: some View {
-        VStack(spacing: 14) {
-            Image(systemName: "arrow.clockwise.circle")
-                .font(.system(size: 32)).foregroundStyle(Module.scrollReverser.accentColor)
-            Text("Relaunch Required")
-                .font(.system(size: 13, weight: .semibold))
-            Text("macOS granted permission but requires a relaunch\nfor the event tap to activate.")
-                .font(.system(size: 11)).foregroundStyle(.secondary)
-                .multilineTextAlignment(.center).padding(.horizontal, 20)
-            Button("Relaunch Vantage") {
-                relaunch()
-            }
-            .buttonStyle(.borderedProminent).controlSize(.small)
+            Text("After granting, relaunch Vantage once.")
+                .font(.system(size: 10)).foregroundStyle(.tertiary)
+            Button("Relaunch Now") { relaunch() }
+                .buttonStyle(.plain)
+                .font(.system(size: 11))
+                .foregroundStyle(Module.scrollReverser.accentColor)
         }
         .padding(24).frame(maxWidth: .infinity)
     }
