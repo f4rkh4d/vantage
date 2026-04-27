@@ -13,6 +13,9 @@ extension Module {
         case .aiAssistant:     return "sparkles"
         case .networkTools:    return "network"
         case .battery:         return "battery.75percent"
+        case .scrollReverser:  return "arrow.up.arrow.down"
+        case .colorPicker:     return "eyedropper.halffull"
+        case .quickToggles:    return "switch.2"
         }
     }
 
@@ -28,6 +31,9 @@ extension Module {
         case .aiAssistant:     return Color(red: 0.90, green: 0.50, blue: 1.0)   // violet
         case .networkTools:    return Color(red: 0.10, green: 0.75, blue: 0.80)  // cyan
         case .battery:         return Color(red: 0.45, green: 0.85, blue: 0.35)  // lime green
+        case .scrollReverser:  return Color(red: 1.0,  green: 0.72, blue: 0.18)  // amber
+        case .colorPicker:     return Color(red: 0.95, green: 0.35, blue: 0.65)  // pink
+        case .quickToggles:    return Color(red: 0.30, green: 0.82, blue: 0.55)  // mint
         }
     }
 }

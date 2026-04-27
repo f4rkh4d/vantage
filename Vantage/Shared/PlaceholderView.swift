@@ -81,6 +81,9 @@ struct ModulePlaceholderView: View {
         case .aiAssistant:     return "Rewrite, translate and\nsummarize selected text"
         case .networkTools:    return "Network stats, DNS switcher\nand VPN controls"
         case .battery:         return "Battery health, charge limit\nand power mode"
+        case .scrollReverser:  return "Reverse mouse and trackpad\nscroll independently"
+        case .colorPicker:     return "Pick any color on screen,\ncopy HEX · RGB · HSL"
+        case .quickToggles:    return "Dark mode, hidden files,\ndesktop icons — one click"
         }
     }
 }

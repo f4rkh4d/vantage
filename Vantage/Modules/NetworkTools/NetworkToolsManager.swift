@@ -90,7 +90,11 @@ final class NetworkToolsManager: ObservableObject {
                 if self.pingResults.count > 10 { self.pingResults = Array(self.pingResults.prefix(10)) }
             }
         }
-        try? process.run()
+        do {
+            try process.run()
+        } catch {
+            isPinging = false
+        }
     }
 
     func refreshDNS() {

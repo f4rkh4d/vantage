@@ -21,6 +21,7 @@ final class BatteryPowerManager: ObservableObject {
     private var timer: Timer?
 
     func start() {
+        guard timer == nil else { return }
         poll()
         timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in self?.poll() }
@@ -36,7 +37,7 @@ final class BatteryPowerManager: ObservableObject {
               let info = IOPSGetPowerSourceDescription(snapshot, ps).takeUnretainedValue() as? [String: Any]
         else { return }
 
-        level = (info[kIOPSCurrentCapacityKey] as? Double ?? 0) / 100.0
+        level = Double(info[kIOPSCurrentCapacityKey] as? Int ?? 0) / 100.0
         isCharging = info[kIOPSIsChargingKey] as? Bool ?? false
         isPluggedIn = (info[kIOPSPowerSourceStateKey] as? String) == kIOPSACPowerValue
         powerSource = isPluggedIn ? "AC Power" : "Battery"
@@ -60,10 +61,11 @@ final class BatteryPowerManager: ObservableObject {
             }
             cycleCount = prop("CycleCount") ?? 0
             let cur: Int = prop("AppleRawCurrentCapacity") ?? 0
+            let maxCap: Int = prop("MaxCapacity") ?? 0
             let des: Int = prop("DesignCapacity") ?? 0
             currentCapacityMAh = cur
             designCapacityMAh = des
-            health = des > 0 ? min(1.0, Double(cur) / Double(des)) : 1.0
+            health = des > 0 ? min(1.0, Double(maxCap) / Double(des)) : 1.0
             let tempRaw: Int = prop("Temperature") ?? 0
             temperature = Double(tempRaw) / 100.0
             IOObjectRelease(service)

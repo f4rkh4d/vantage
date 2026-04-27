@@ -16,6 +16,9 @@ struct ModuleContentView: View {
             case .aiAssistant:     AIAssistantView()
             case .networkTools:    NetworkToolsView()
             case .battery:         BatteryView()
+            case .scrollReverser:  ScrollReverserView()
+            case .colorPicker:     ColorPickerView()
+            case .quickToggles:    QuickTogglesView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

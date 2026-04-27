@@ -26,6 +26,8 @@ final class FocusManager: ObservableObject {
     }
 
     func start() {
+        timer?.invalidate()
+        timer = nil
         if phase == .idle { phase = .work; timeRemaining = workDuration }
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in self?.tick() }

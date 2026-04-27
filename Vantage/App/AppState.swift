@@ -11,6 +11,9 @@ enum Module: String, CaseIterable, Identifiable {
     case aiAssistant
     case networkTools
     case battery
+    case scrollReverser
+    case colorPicker
+    case quickToggles
 
     var id: String { rawValue }
 
@@ -26,6 +29,9 @@ enum Module: String, CaseIterable, Identifiable {
         case .aiAssistant:     return "AI Assistant"
         case .networkTools:    return "Network Tools"
         case .battery:         return "Battery & Power"
+        case .scrollReverser:  return "Scroll Reverser"
+        case .colorPicker:     return "Color Picker"
+        case .quickToggles:    return "Quick Toggles"
         }
     }
 }

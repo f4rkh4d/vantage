@@ -159,7 +159,6 @@ private struct AppRow: View {
         .onHover { isHovered = $0 }
         .onTapGesture {
             AppLauncherManager.shared.launch(app)
-            NSApp.keyWindow?.close()
         }
     }
 }

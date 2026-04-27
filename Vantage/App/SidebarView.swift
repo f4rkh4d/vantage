@@ -6,20 +6,26 @@ struct SidebarView: View {
     @Namespace private var selectionNamespace
 
     var body: some View {
-        VStack(spacing: 2) {
-            ForEach(Module.allCases) { module in
-                SidebarButton(
-                    module: module,
-                    isSelected: appState.activeModule == module,
-                    namespace: selectionNamespace
-                ) {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
-                        appState.activeModule = module
+        VStack(spacing: 0) {
+            ScrollView(.vertical) {
+                VStack(spacing: 2) {
+                    ForEach(Module.allCases) { module in
+                        SidebarButton(
+                            module: module,
+                            isSelected: appState.activeModule == module,
+                            namespace: selectionNamespace
+                        ) {
+                            withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
+                                appState.activeModule = module
+                            }
+                        }
                     }
                 }
+                .padding(.top, 10)
             }
+            .scrollIndicators(.hidden)
 
-            Spacer()
+            Divider().opacity(0.4)
 
             // Settings gear
             Button {
@@ -33,9 +39,8 @@ struct SidebarView: View {
             }
             .buttonStyle(SidebarGearButtonStyle())
             .help("Settings")
-            .padding(.bottom, 10)
+            .padding(.vertical, 6)
         }
-        .padding(.top, 10)
         .frame(width: 52)
     }
 }
