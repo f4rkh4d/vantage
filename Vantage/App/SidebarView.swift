@@ -5,15 +5,26 @@ struct SidebarView: View {
     @Binding var showSettings: Bool
     @Namespace private var selectionNamespace
 
+    private let modules = Module.allCases
+    private let gearHeight: CGFloat = 44   // divider + button area
+    private let topPad: CGFloat = 8
+    private let iconSize: CGFloat = 34
+
     var body: some View {
-        VStack(spacing: 0) {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 2) {
-                    ForEach(Module.allCases) { module in
+        GeometryReader { geo in
+            let available = geo.size.height - gearHeight - topPad
+            let count = CGFloat(modules.count)
+            // spacing can go negative (overlap) if truly needed, but floor at -2
+            let spacing = max(-2, (available - count * iconSize) / max(count - 1, 1))
+
+            VStack(spacing: 0) {
+                VStack(spacing: spacing) {
+                    ForEach(modules) { module in
                         SidebarButton(
                             module: module,
                             isSelected: appState.activeModule == module,
-                            namespace: selectionNamespace
+                            namespace: selectionNamespace,
+                            size: iconSize
                         ) {
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.75)) {
                                 appState.activeModule = module
@@ -21,26 +32,23 @@ struct SidebarView: View {
                         }
                     }
                 }
-                .padding(.top, 10)
-            }
-            .scrollIndicators(.hidden)
-            .clipped()
+                .padding(.top, topPad)
 
-            Divider().opacity(0.4)
+                Spacer(minLength: 0)
 
-            // Settings gear
-            Button {
-                showSettings = true
-            } label: {
-                Image(systemName: "gearshape")
-                    .font(.system(size: 15, weight: .medium))
-                    .frame(width: 36, height: 36)
-                    .foregroundStyle(.tertiary)
-                    .contentShape(Rectangle())
+                Divider().opacity(0.4)
+
+                Button { showSettings = true } label: {
+                    Image(systemName: "gearshape")
+                        .font(.system(size: 14, weight: .medium))
+                        .frame(width: iconSize, height: iconSize)
+                        .foregroundStyle(.tertiary)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(SidebarGearButtonStyle())
+                .help("Settings")
+                .frame(height: gearHeight)
             }
-            .buttonStyle(SidebarGearButtonStyle())
-            .help("Settings")
-            .padding(.vertical, 6)
         }
         .frame(width: 52)
     }
@@ -50,25 +58,24 @@ private struct SidebarButton: View {
     let module: Module
     let isSelected: Bool
     let namespace: Namespace.ID
+    let size: CGFloat
     let action: () -> Void
     @State private var isHovered = false
 
     var body: some View {
         Button(action: action) {
             ZStack {
-                // Selection background with matchedGeometryEffect for smooth slide
                 if isSelected {
-                    RoundedRectangle(cornerRadius: 9, style: .continuous)
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
                         .fill(module.accentColor.opacity(0.15))
                         .matchedGeometryEffect(id: "selection", in: namespace)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .stroke(module.accentColor.opacity(0.2), lineWidth: 0.5)
                         )
                 }
-
                 Image(systemName: module.icon)
-                    .font(.system(size: 15, weight: isSelected ? .semibold : .regular))
+                    .font(.system(size: 14, weight: isSelected ? .semibold : .regular))
                     .foregroundStyle(
                         isSelected
                             ? AnyShapeStyle(module.accentColor)
@@ -77,13 +84,13 @@ private struct SidebarButton: View {
                     .scaleEffect(isHovered && !isSelected ? 1.08 : 1.0)
                     .animation(.spring(response: 0.2, dampingFraction: 0.6), value: isHovered)
             }
-            .frame(width: 36, height: 36)
+            .frame(width: size, height: size)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .help(module.title)
         .onHover { isHovered = $0 }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, 9)
     }
 }
 
