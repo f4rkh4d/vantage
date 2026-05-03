@@ -41,3 +41,7 @@ requires Xcode 15+. swift 5, swiftui.
 - brightness control intentionally missing — apple locks that behind private apis that break every major release, not worth it
 - ai module doesn't store conversation history between sessions, just the api keys
 - tested on m2 pro, macOS 15. haven't tested on intel
+
+## issues
+
+open feedback at [github.com/f4rkh4d/vantage/issues](https://github.com/f4rkh4d/vantage/issues).
